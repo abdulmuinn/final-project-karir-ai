@@ -1,0 +1,17 @@
+name: Ping Streamlit App (Keep-Alive)
+
+on:
+  schedule:
+   
+    - cron: "0 0 */3 * *"
+  workflow_dispatch: 
+
+jobs:
+  ping_app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send HTTP Request to Streamlit
+        run: |
+          HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" https://vinix7-final-project-kelompok-2.streamlit.app/)
+          echo "Streamlit App responded with status: $HTTP_STATUS"
+          
